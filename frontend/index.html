@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Information Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Student Information Management System</h1>
+    <nav id="nav">
+      <button data-page="home" class="active">Home</button>
+      <button data-page="add">Add Student</button>
+      <button data-page="list">Student List</button>
+      <button data-page="search">Search Student</button>
+    </nav>
+  </header>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <main>
+    <section id="page-home" class="page active">
+      <h2>Welcome</h2>
+      <p>A three-tier cloud application: <b>Netlify</b> (frontend) &rarr; <b>Render</b> (Node/Express API) &rarr; <b>MongoDB Atlas</b> (database).</p>
+      <div class="cards">
+        <div class="card"><span id="stat-total">&ndash;</span><small>Total students</small></div>
+        <div class="card"><span id="stat-api">&hellip;</span><small>API status</small></div>
+      </div>
+      <p class="muted">Note: on Render&#39;s free plan the API sleeps when idle, so the first request may take 30&ndash;60 seconds.</p>
+    </section>
+
+    <section id="page-add" class="page">
+      <h2>Add Student</h2>
+      <form id="add-form" novalidate>
+        <label>Student ID<input name="studentId" placeholder="ST101" required /></label>
+        <label>Name<input name="name" placeholder="Rahul Sharma" required /></label>
+        <label>Email<input name="email" type="email" placeholder="rahul@example.com" required /></label>
+        <label>Department<input name="department" placeholder="Computer Science" required /></label>
+        <label>Semester<input name="semester" type="number" min="1" max="12" placeholder="5" required /></label>
+        <label>Contact (10 digits, optional)<input name="contact" placeholder="9876543210" /></label>
+        <button type="submit" class="primary">Add Student</button>
+      </form>
+    </section>
+
+    <section id="page-list" class="page">
+      <h2>Student List</h2>
+      <button id="refresh" class="secondary">Refresh</button>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Sem</th><th>Contact</th><th>Actions</th></tr></thead>
+        <tbody id="list-body"></tbody>
+      </table></div>
+    </section>
+
+    <section id="page-search" class="page">
+      <h2>Search Student</h2>
+      <form id="search-form" class="inline">
+        <input id="search-input" placeholder="Search by ID, name, email or department" required />
+        <button type="submit" class="primary">Search</button>
+      </form>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Sem</th><th>Contact</th><th>Actions</th></tr></thead>
+        <tbody id="search-body"></tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <form id="edit-form" class="modal-box" novalidate>
+      <h2>Edit Student <span id="edit-id"></span></h2>
+      <label>Name<input name="name" required /></label>
+      <label>Email<input name="email" type="email" required /></label>
+      <label>Department<input name="department" required /></label>
+      <label>Semester<input name="semester" type="number" min="1" max="12" required /></label>
+      <label>Contact<input name="contact" /></label>
+      <div class="row">
+        <button type="submit" class="primary">Save changes</button>
+        <button type="button" id="edit-cancel" class="secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
